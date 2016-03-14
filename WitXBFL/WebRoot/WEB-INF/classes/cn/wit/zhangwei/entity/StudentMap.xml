@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ <mapper namespace="cn.wit.zhangwei.dao.StudentMapperDao">
+ 		<select id="findAll"
+			  resultType="cn.wit.zhangwei.entity.Student">
+			  select * from Wit_Students
+		</select>
+		<select id="findStudent"
+			  resultType="cn.wit.zhangwei.entity.Student">
+			  select * from Wit_Students where (XueHao=#{0} or Name=#{1}) and CollegeId=#{2};
+	    </select>
+	    <select id="findStudent1"
+	    	  resultType="cn.wit.zhangwei.entity.Student">
+	    	  select * from Wit_Students where XueHao=#{0} or Name=#{1}
+	    </select>
+	    <select id="findStudentByCollegeId"
+	    	  resultType="cn.wit.zhangwei.entity.Student">
+	    	  select * from Wit_Students where CollegeId = #{0}
+	    </select>
+		<update id="updateStudent">
+			  update Wit_Students set PassWord=#{1} where XueHao=#{0}
+		</update>
+		<insert id="addStudent" 
+			  parameterType="cn.wit.zhangwei.entity.Student">
+			  insert into Wit_Students(XueHao,Name,Gender,CollegeId,Maj_ID,ID_Card,Phone,PassWord) values(#{xuehao},#{name},#{gender},#{collegeId},#{majId},#{id_card},#{phone},#{password})
+		</insert>
+		<delete id="deleteStudent">
+			  delete from Wit_Students where XueHao = #{xueHao}
+		</delete>
+ </mapper>

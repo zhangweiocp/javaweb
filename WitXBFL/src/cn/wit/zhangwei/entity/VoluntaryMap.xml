@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.wit.zhangwei.dao.VoluntaryMapperDao">
+		<select id="findAll"
+			  resultType="cn.wit.zhangwei.entity.Voluntary">
+			  select * from Wit_Voluntary
+		</select>
+		<select id="findAllAndSort"
+			  resultType="cn.wit.zhangwei.entity.Voluntary">
+			  select * from Wit_Voluntary order by CollegeId
+		</select>
+		<select id="findVoluntary"
+			  resultType="cn.wit.zhangwei.entity.Voluntary">
+			  select * from Wit_Voluntary where XueHao = #{0} and CollegeId = #{1} 
+		</select>
+		<select id="search"
+			  resultType="cn.wit.zhangwei.entity.Voluntary">
+			  select * from Wit_Voluntary where (XueHao = #{0} or Name = #{1}) and CollegeId = #{2}
+		</select>
+		<select id="search1"
+			  resultType="cn.wit.zhangwei.entity.Voluntary">
+			  select * from Wit_Voluntary where XueHao = #{0} or Name = #{1}
+		</select>
+		<select id="findVoluntaryByCol"
+			  resultType="cn.wit.zhangwei.entity.Voluntary">
+			  select * from Wit_Voluntary where CollegeId = #{0}
+		</select>
+		<select id="findVoluntaryByXueHao"
+			  resultType="cn.wit.zhangwei.entity.Voluntary">
+			  select * from Wit_Voluntary where XueHao = #{0}
+		</select>
+		<update id="updateVoluntary">
+			  update Wit_Voluntary set Pro1=#{1},Pro2=#{2},Pro3=#{3} where XueHao=#{0}
+		</update>
+		<insert id="addVoluntary" 
+			  parameterType="cn.wit.zhangwei.entity.Voluntary">
+			  insert into Wit_Voluntary(XueHao,Name,CollegeId,Pro1,Pro2,Pro3) values(#{xueHao},#{name},#{collegeId},#{pro1},#{pro2},#{pro3})
+		</insert>
+		<delete id="deleteVoluntary">
+			  delete from Wit_Students where XueHao = #{xueHao}
+		</delete>
+		<update id="confirmVoluntary">
+			  update Wit_Voluntary set Final_Pro=#{1} where XueHao = #{0}
+		</update>
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="WitXBFL"
+  id="myeclipse.1448952556800"
+  context-root="/WitXBFL"
+  j2ee-spec="5.0"
+  archive="WitXBFL.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

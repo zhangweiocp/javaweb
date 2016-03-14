@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.wit.zhangwei.dao.AdminMapperDao">
+	
+	<select id="findAll"
+			resultType="cn.wit.zhangwei.entity.Admin">
+			select * from Wit_Admin
+	</select>
+	<select id="findAll1"
+			resultType="cn.wit.zhangwei.entity.AdminManage">
+			  select a.*,b.CollegeName from Wit_Admin a join Wit_College b on a.CollegeId = b.CollegeId
+	</select>
+	<select id="findAll2"
+			resultType="cn.wit.zhangwei.entity.AdminManage">
+			select a.*,b.CollegeName from Wit_Admin a join Wit_College b on a.CollegeId = b.CollegeId where a.CollegeId = #{0}
+	</select>
+	<select id="findAdmin"
+			  resultType="cn.wit.zhangwei.entity.AdminManage">
+			  select a.*,b.CollegeName from Wit_Admin a join Wit_College b on a.CollegeId = b.CollegeId where (a.UserName=#{0} or a.CollegeId=#{1});
+	</select>
+    <select id="findAdmin1"
+			 resultType="cn.wit.zhangwei.entity.AdminManage">
+			 select a.*,b.CollegeName from Wit_Admin a join Wit_College b on a.CollegeId = b.CollegeId where (a.UserName=#{0} and a.CollegeId=#{1})
+	</select>
+	<select id ="findMaxID"
+		      resultType="int">
+		      select MAX(ID) from Wit_Admin;
+	</select>
+	<select id="paging"
+			  resultType="cn.wit.zhangwei.entity.Admin">
+			  select top 3 * from Wit_Admin where ID not in (select top 6 ID from Wit_Admin order by ID ASC) order by ID ASC;
+	</select>
+	<delete id="deleteAdmin"
+			  parameterType="int">
+			  delete from Wit_Admin where ID=#{id}
+	</delete>
+<!--  	<select id="findById"
+			  parameterType="int"
+			  resultType="cn.wit.zhangwei.entity.Role">
+			  select ID,UserName,PassWord from Wit_Role where ID=#{roleID}
+	</select>-->
+	<update id="updateAdmin"
+			  parameterType="cn.wit.zhangwei.entity.Admin">
+			  update Wit_Admin set UserName=#{userName},PassWord=#{passWord} where ID=#{id}
+	</update>
+	<insert id="addAdmin" 
+			  parameterType="cn.wit.zhangwei.entity.Admin">
+			  insert into Wit_Admin(ID,UserName,PassWord,RoleLevel,CollegeId) values(#{id},#{userName},#{passWord},#{roleLevel},#{collegeId})
+	</insert>
+</mapper>
